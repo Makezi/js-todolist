@@ -1,21 +1,26 @@
+// Filter constants
+
 const SHOW_ALL = "all";
 const SHOW_ACTIVE = "active";
 const SHOW_COMPLETED = "completed";
+
+// Element selectors
 
 const todoInput = document.querySelector(".todo-input");
 const todoCounter = document.querySelector(".todo-counter");
 const todoList = document.querySelector(".todo-list");
 const filters = document.querySelectorAll(".filter-btn");
 const clearBtn = document.querySelector(".clear-btn");
+
 let todos = JSON.parse(localStorage.getItem("todos")) || [
   { text: "Read: Like no one ever was", completed: true },
   { text: "Read: I want to be the very best", completed: true },
   { text: "Clean the dishes", completed: false }
 ];
-
 let setFilter = SHOW_ALL;
 
 function addTodo(e) {
+  // Prevent the form submittion from refreshing page
   e.preventDefault();
   const text = this.querySelector("input").value;
   if (!text) return;
@@ -34,27 +39,33 @@ function renderList(todos = [], todoList) {
 }
 
 function addTodoDOM(todo, index) {
+  // List item
   const itemDOM = document.createElement("li");
   itemDOM.setAttribute("class", "todo-item");
 
+  // Input checkbox
   const completeDOM = document.createElement("input");
   completeDOM.setAttribute("type", "checkbox");
   completeDOM.setAttribute("id", `item${index}`);
   completeDOM.setAttribute("data-index", index);
   if (todo.completed) completeDOM.setAttribute("checked", todo.completed);
 
+  // Custom checkbox div
   const checkboxDOM = document.createElement("div");
   checkboxDOM.setAttribute("class", "todo-checkbox");
 
+  // Label linked to input checkbox
   const labelDOM = document.createElement("label");
   labelDOM.setAttribute("for", `item${index}`);
   labelDOM.innerText = todo.text;
   labelDOM.insertBefore(checkboxDOM, labelDOM.firstChild);
 
+  // Delete button
   const deleteDOM = document.createElement("button");
   deleteDOM.setAttribute("class", "todo-delete");
   deleteDOM.innerHTML = "&times;";
 
+  // Append input checkbox, label and delete button to list item DOM
   itemDOM.appendChild(completeDOM);
   itemDOM.appendChild(labelDOM);
   itemDOM.appendChild(deleteDOM);
@@ -70,6 +81,7 @@ function updateCounter() {
 }
 
 function toggleComplete(e) {
+  // Only keep track of elements that are "input"
   if (!e.target.matches("input")) return;
   const index = e.target.dataset.index;
   todos[index].completed = !todos[index].completed;
@@ -78,6 +90,7 @@ function toggleComplete(e) {
 }
 
 function deleteTodo(e) {
+  // Only keep track of elements that are passed that are "button"
   if (!e.target.matches("button")) return;
   const index = e.target.parentNode.querySelector("input").dataset.index;
   todos.splice(index, 1);
@@ -102,6 +115,8 @@ function clearCompleted() {
   localStorage.setItem("todos", JSON.stringify(todos));
   renderList(todos, todoList);
 }
+
+// Event listeners
 
 todoInput.addEventListener("submit", addTodo);
 todoList.addEventListener("click", toggleComplete);
