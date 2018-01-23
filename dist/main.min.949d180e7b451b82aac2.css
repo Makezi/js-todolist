@@ -1,0 +1,230 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #518499;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.1em;
+  color: #4D4D4D;
+}
+
+@media screen and (min-width: 480px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+.app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #FEFEFD;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.todo-input {
+  -ms-flex-item-align: center;
+  align-self: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 90%;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin: 20px 0;
+}
+
+.todo-input > input[type=text] {
+  padding: 20px 5px;
+  font-size: 1.5em;
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.todo-input > input[type=submit] {
+  -ms-flex-item-align: center;
+  align-self: center;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #518499;
+  color: #FEFEFD;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size: 1.5em;
+  outline: none;
+  transition: 0.1s;
+  cursor: pointer;
+}
+
+.todo-input > input[type=submit]:hover {
+  background-color: rgba(81, 132, 153, 0.8);
+}
+
+.todo-input > input[type=submit]:active {
+  position: relative;
+  top: 2px;
+  box-shadow: none;
+  transition: 0.1s;
+}
+
+::-webkit-input-placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+:-ms-input-placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+::placeholder {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.todo-counter {
+  padding: 0 30px;
+  font-size: 0.9em;
+  color: #518499;
+  margin-top: -20px;
+  padding-bottom: 15px;
+}
+
+.todo-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 30px;
+}
+
+.todo-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.todo-item > label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 10px 0;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.todo-item input[type=checkbox] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+.todo-item input[type=checkbox]:checked ~ label {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.4);
+  transition: 0.1s;
+}
+
+.todo-item input[type=checkbox]:checked ~ label .todo-checkbox {
+  background: #94CEB5;
+  -webkit-transform: scale(0.6);
+  transform: scale(0.6);
+  transition: 0.2s;
+}
+
+.todo-item:hover .todo-delete {
+  visibility: visible;
+}
+
+.todo-checkbox {
+  background: rgba(15, 15, 15, 0.15);
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  -ms-flex-item-align: center;
+  align-self: center;
+  margin-right: 10px;
+}
+
+.todo-delete {
+  visibility: hidden;
+  font-size: 1.4em;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  color: red;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.todo-delete:hover {
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 50%;
+}
+
+.buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.buttons .clear,.buttons .filters {
+  margin: 20px;
+}
+
+.buttons .btn {
+  font-size: 0.8em;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(15, 15, 15, 0.15);
+  outline: none;
+  cursor: pointer;
+}
+
+.footer-info {
+  text-align: center;
+  color: #eaeaea;
+  font-weight: 100;
+  font-size: 1.1rem;
+}
+
+.footer-info a {
+  color: #9eb9ca;
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
