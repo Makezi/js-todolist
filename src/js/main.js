@@ -8,13 +8,11 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
   const filters = document.querySelector('.filters');
   const clearBtn = document.querySelector('.clear-btn');
 
-  let todos = JSON.parse(
-    localStorage.getItem('todos') || [
-      { text: 'Read: Like no one ever was', completed: true },
-      { text: 'Read: I want to be the very best', completed: true },
-      { text: 'Clean the dishes', completed: false }
-    ]
-  );
+  let todos = JSON.parse(localStorage.getItem('todos')) || [
+    { text: 'Read: Like no one ever was', completed: true },
+    { text: 'Read: I want to be the very best', completed: true },
+    { text: 'Clean the dishes', completed: false }
+  ];
   let activeFilter = SHOW_ALL;
 
   function addTodo(event) {
