@@ -24,11 +24,11 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
     if (!text) return;
     todos.push({ text, completed: false });
     localStorage.setItem('todos', JSON.stringify(todos));
-    renderList(todos, todoList);
+    renderList();
     this.reset();
   }
 
-  function renderList(todos = [], todoList) {
+  function renderList() {
     todoList.innerHTML = '';
     filterList(todos).map((todo, index) => {
       todoList.insertBefore(addTodoDOM(todo, index), todoList.firstChild);
@@ -84,7 +84,7 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
     const index = event.target.dataset.index;
     todos[index].completed = !todos[index].completed;
     localStorage.setItem('todos', JSON.stringify(todos));
-    renderList(todos, todoList);
+    renderList();
   }
 
   function deleteTodo(event) {
@@ -93,7 +93,7 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
     const index = event.target.parentNode.querySelector('input').dataset.index;
     todos.splice(index, 1);
     localStorage.setItem('todos', JSON.stringify(todos));
-    renderList(todos, todoList);
+    renderList();
   }
 
   function filterList(todos) {
@@ -109,14 +109,17 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
   }
 
   function setActiveFilter(event) {
+    const filterBtns = filters.querySelectorAll('.filter-btn');
+    filterBtns.forEach(button => button.classList.remove('active'));
+    event.target.classList.add('active');
     activeFilter = event.target.dataset.filter;
-    renderList(todos, todoList);
+    renderList();
   }
 
   function clearCompleted() {
     todos = todos.filter(todo => !todo.completed);
     localStorage.setItem('todos', JSON.stringify(todos));
-    renderList(todos, todoList);
+    renderList();
   }
 
   // Event listeners
@@ -126,5 +129,5 @@ import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from './constants';
   filters.addEventListener('click', setActiveFilter);
   clearBtn.addEventListener('click', clearCompleted);
 
-  renderList(todos, todoList);
+  renderList();
 })();
